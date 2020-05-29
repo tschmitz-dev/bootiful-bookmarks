@@ -11,6 +11,10 @@
     <name>Spring Bootiful Bookmarks</name>
     <description>A sample project that is build up with Spring Boot.</description>
 
+    <modules>
+        <module>config-server</module>
+    </modules>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
