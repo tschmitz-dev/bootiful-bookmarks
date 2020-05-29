@@ -1,0 +1,51 @@
+version: '3'
+services:
+  discovery-server:
+    container_name: bootiful-bookmarks-discovery
+    image: tschmitz-dev/bootiful-bookmarks-discovery-server:1.0.0-SNAPSHOT
+    ports:
+      - 8761:8761
+
+  config-server:
+    container_name: bootiful-bookmarks-config
+    image: tschmitz-dev/bootiful-bookmarks-config-server:1.0.0-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DCONFIG_REPO=https://github.com/tschmitz-dev/cloud-config.git
+    ports:
+      - 8888:8888
+
+  bookmark-service:
+    container_name: bootiful-bookmarks-service
+    image: tschmitz-dev/bootiful-bookmarks-bookmark-data-rest-service:1.0.0-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery-server:8761/eureka
+    depends_on:
+      - discovery-server
+      - config-server
+      - authorization-server
+    ports:
+      - 8001:8001
+
+  bookmark-service-2:
+    container_name: bootiful-bookmarks-service-2
+    image: tschmitz-dev/bootiful-bookmarks-bookmark-data-rest-service:1.0.0-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery-server:8761/eureka
+    depends_on:
+      - discovery-server
+      - config-server
+      - authorization-server
+    ports:
+      - 8002:8001
+
+  authorization-server:
+    container_name: bootiful-authorization-server
+    image: tschmitz-dev/bootiful-authorization-server:1.0.0-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery-server:8761/eureka
+    ports:
+      - 8081:8081
