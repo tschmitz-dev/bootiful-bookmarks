@@ -15,6 +15,7 @@
         <module>config-server</module>
         <module>discovery-server</module>
         <module>bookmark-data-rest-service</module>
+        <module>bootiful-authorization-server</module>
     </modules>
 
     <parent>

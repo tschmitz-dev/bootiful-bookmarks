@@ -1,0 +1,3 @@
+[submodule "bootiful-authorization-server"]
+	path = bootiful-authorization-server
+	url = https://github.com/tschmitz-dev/bootiful-authorization-server.git
