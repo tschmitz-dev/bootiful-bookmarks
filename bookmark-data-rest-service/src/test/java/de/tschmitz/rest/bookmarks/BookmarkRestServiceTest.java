@@ -3,6 +3,8 @@ package de.tschmitz.rest.bookmarks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -26,9 +28,12 @@ import static org.springframework.hateoas.MediaTypes.HAL_JSON;
  * <p>
  * To autowire the TestRestTemplate we have to use a WebEnvironment with a
  * web application context (e.g. WebEnvironment.RANDOM_PORT).
+ * <p>
+ * Security is explicit disabled for this tests.
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("dev")
+@ActiveProfiles("disable-oauth-resource-server")
+@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 class BookmarkRestServiceTest {
 
     @Autowired

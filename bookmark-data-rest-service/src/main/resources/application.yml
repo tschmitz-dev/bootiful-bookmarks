@@ -18,6 +18,14 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
 
+security:
+  oauth2:
+    resource:
+      token-info-uri: ${OAUTH_TAKEN_URI:http://localhost:8081/oauth/check_token}
+    client:
+      clientId: ${CLIENT_ID:ce920188d47a2f51d7c6}
+      clientSecret: ${CLIENT_SECRET:8b562ac7f64785c96a5d207f4a6cc13725a06cbb}
+
 ---
 spring:
   profiles: dev
