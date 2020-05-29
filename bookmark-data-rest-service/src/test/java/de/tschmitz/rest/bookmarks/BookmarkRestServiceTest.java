@@ -14,6 +14,7 @@ import org.springframework.hateoas.server.core.TypeReferences.EntityModelType;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.net.URI;
 
@@ -27,6 +28,7 @@ import static org.springframework.hateoas.MediaTypes.HAL_JSON;
  * web application context (e.g. WebEnvironment.RANDOM_PORT).
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("dev")
 class BookmarkRestServiceTest {
 
     @Autowired
