@@ -6,7 +6,7 @@
     <artifactId>bookmark-data-rest-service</artifactId>
 
     <parent>
-        <artifactId>spring-bootiful-bookmarks</artifactId>
+        <artifactId>bootiful-bookmarks</artifactId>
         <groupId>de.tschmitz.web</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
