@@ -30,6 +30,13 @@ security:
 spring:
   profiles: dev
 
+logging:
+  level:
+    web: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+
 eureka:
   client:
     enabled: false
