@@ -50,3 +50,10 @@ spring:
     username: postgres
     password: # Is set in Cloud Config properties
     platform: postgres
+
+---
+spring:
+  profiles: disable-eureka-client
+eureka:
+  client:
+    enabled: false
