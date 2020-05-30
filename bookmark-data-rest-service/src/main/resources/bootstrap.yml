@@ -6,3 +6,10 @@ spring:
       uri: ${CLOUD_CONFIG_SERVER:http://localhost:8888}
       username: ${CONFIG_SERVER_USERNAME:user}
       password: ${CONFIG_SERVER_PASSWORD:bWI47ZWq2e8h0awtj7D} # @todo Consider to use Spring Cloud Vault to manage credentials.
+
+---
+spring:
+  profiles: disable-cloud-config-client
+  cloud:
+    config:
+      enabled: false

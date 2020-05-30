@@ -32,7 +32,7 @@ import static org.springframework.hateoas.MediaTypes.HAL_JSON;
  * Security is explicit disabled for this tests.
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("disable-oauth-resource-server")
+@ActiveProfiles({"disable-oauth-resource-server", "disable-cloud-config-client"})
 @EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 class BookmarkRestServiceTest {
 
