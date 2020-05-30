@@ -31,6 +31,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeRequests(ar -> ar
+                    // Allow access to HAL browser
+                    .antMatchers("/api/browser/**").permitAll()
                     .anyRequest().authenticated());
         //@formatter:on
     }
