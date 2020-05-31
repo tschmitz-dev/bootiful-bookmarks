@@ -24,6 +24,11 @@
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
         <dependency>
+            <!-- To access authentication object in SpEL data queries -->
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-data</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
@@ -55,6 +60,11 @@
             <!-- To test the data-rest services in an easy way with TestRestTemplate -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
