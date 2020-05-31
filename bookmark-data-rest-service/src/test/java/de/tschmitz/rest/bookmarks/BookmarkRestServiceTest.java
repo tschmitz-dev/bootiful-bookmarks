@@ -13,10 +13,12 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.core.TypeReferences.CollectionModelType;
 import org.springframework.hateoas.server.core.TypeReferences.EntityModelType;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 import java.net.URI;
 
@@ -31,9 +33,10 @@ import static org.springframework.hateoas.MediaTypes.HAL_JSON;
  * <p>
  * Security is explicit disabled for this tests.
  */
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {BookmarkRestServiceTestConfig.class})
 @ActiveProfiles({"disable-oauth-resource-server", "disable-cloud-config-client", "disable-eureka-client"})
-@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
+@TestPropertySource(properties = {"spring.datasource.platform=test"})
+@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 class BookmarkRestServiceTest {
 
     @Autowired
@@ -79,8 +82,8 @@ class BookmarkRestServiceTest {
         ResponseEntity<CollectionModel<Bookmark>> responseEntity = restTemplate.exchange(requestEntity, new CollectionModelType<Bookmark>() {
         });
 
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isNotNull();
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
 
         CollectionModel<Bookmark> bookmarks = responseEntity.getBody();
         assertThat(bookmarks).isNotNull();
@@ -96,12 +99,13 @@ class BookmarkRestServiceTest {
         Bookmark bookmark = new Bookmark();
         bookmark.setTitle("DuckDuckGo");
         bookmark.setHref("https://duckduckgo.com");
+        bookmark.setUserId("demo");
 
         RequestEntity<Bookmark> requestEntity = RequestEntity.post(bookmarksUrl).accept(HAL_JSON).body(bookmark);
         ResponseEntity<Bookmark> responseEntity = restTemplate.exchange(requestEntity, Bookmark.class);
 
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(responseEntity.getBody()).isNotNull();
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
 
         Bookmark savedBookmark = responseEntity.getBody();
         assertThat(savedBookmark.getTitle()).isEqualTo("DuckDuckGo");
@@ -126,7 +130,7 @@ class BookmarkRestServiceTest {
         ResponseEntity<Void> responseEntity = restTemplate.exchange(requestEntity, Void.class);
 
         assertThat(responseEntity).isNotNull();
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(204);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 
     @Test
@@ -140,6 +144,6 @@ class BookmarkRestServiceTest {
         ResponseEntity<Void> responseEntity = restTemplate.exchange(requestEntity, Void.class);
 
         assertThat(responseEntity).isNotNull();
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(404);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 }
