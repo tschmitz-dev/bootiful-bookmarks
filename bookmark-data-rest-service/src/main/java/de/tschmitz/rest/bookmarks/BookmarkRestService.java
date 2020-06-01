@@ -2,13 +2,13 @@ package de.tschmitz.rest.bookmarks;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import java.security.Principal;
-
+/**
+ * Boot application class to start the REST service.
+ */
 @SpringBootApplication
-@RestController
+@EnableJpaAuditing
 public class BookmarkRestService {
 
     public static void main(String[] args) {

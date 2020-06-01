@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Bookmark {
 
     @Id
@@ -26,6 +28,8 @@ public class Bookmark {
     private Long id;
 
     /** External user id */
+    @CreatedBy
+    @ReadOnlyProperty
     private String userId;
 
     private String title;
