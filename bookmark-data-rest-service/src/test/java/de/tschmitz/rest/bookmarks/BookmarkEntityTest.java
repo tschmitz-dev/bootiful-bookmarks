@@ -15,7 +15,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -31,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * like expected.
  */
 @SpringBootTest
-@ActiveProfiles({"disable-oauth-resource-server", "disable-cloud-config-client", "disable-eureka-client"})
 @AutoConfigureMockMvc
 public class BookmarkEntityTest {
 

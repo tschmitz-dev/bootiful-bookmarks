@@ -7,9 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.Optional;
 
@@ -21,16 +19,12 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  * <p>
  * Tests for repository methods that are annotated with {@literal PreAuthorize} or {@literal PostAuthorize}
  * need only a mocked user (@WithMockUser) but testing repository methods that use a principal object in
- * a custom query (@Query) requires an instance of {@literal SecurityEvaluationContextExtension} with an
- * authentication instance.
+ * a custom query (@Query) requires an instance of {@literal SecurityEvaluationContextExtension}.
  *
  * @see RepositorySecurityTestConfig
  */
 @ContextConfiguration(classes = {RepositorySecurityTestConfig.class, BookmarkRestService.class})
 @DataJpaTest
-@ActiveProfiles({"disable-oauth-resource-server", "disable-cloud-config-client", "disable-eureka-client"})
-// Override datasource platform property to avoid loading of data-h2.sql but load data-test.sql
-@TestPropertySource(properties = {"spring.datasource.platform=test"})
 class BookmarkRepositorySecurityTest {
 
     @Autowired

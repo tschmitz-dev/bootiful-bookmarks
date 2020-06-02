@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import java.net.URI;
@@ -34,8 +33,6 @@ import static org.springframework.hateoas.MediaTypes.HAL_JSON;
  * Security is explicit disabled for this tests.
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = {BookmarkRestServiceTestConfig.class})
-@ActiveProfiles({"disable-oauth-resource-server", "disable-cloud-config-client", "disable-eureka-client"})
-@TestPropertySource(properties = {"spring.datasource.platform=test"})
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 class BookmarkRestServiceTest {
 

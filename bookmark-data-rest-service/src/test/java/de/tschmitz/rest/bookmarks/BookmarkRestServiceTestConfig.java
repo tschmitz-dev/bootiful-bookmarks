@@ -24,7 +24,7 @@ public class BookmarkRestServiceTestConfig {
     @Bean
     public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
         // To let a query like "select e from #{#entityName} e where e.userId = ?#{principal?.username}"
-        // work in tests without throwing an exception we need a fake authentication.
+        // work in tests with security disabled we need a fake authentication object.
         User user = new User("bud", "spencer",
                 Collections.singletonList(new SimpleGrantedAuthority("USER")));
         Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
